@@ -1,0 +1,5 @@
+GOALS:
+- Set different light zones separately
+DONE - Adjust time for each zone
+- Set delay between zones when light turns on/off
+- Somehow expand comms to accomodate multiple parameters
