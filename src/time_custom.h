@@ -92,10 +92,49 @@ struct Time {
         return result;
     }
 
+    bool operator > (const Time& other) const {
+        return (hours > other.hours || (hours == other.hours && min > other.min));
+    }
+
+    bool operator < (const Time& other) const {
+        return (hours < other.hours || (hours == other.hours && min < other.min));
+    }
+
+    bool operator >= (const Time& other) const {
+        return (hours > other.hours || (hours == other.hours && min >= other.min));
+    }
+
+    bool operator <= (const Time& other) const {
+        return (hours < other.hours || (hours == other.hours && min <= other.min));
+    }
+
+    bool inRange(const Time start, const Time end, const Time current) const {
+        if (start <= end) {
+            return (this >= start && this <= end);
+        } else {
+            return (*this >= start || *this <= end);
+        }
+    }
+
     String toString() const {
         return String(hours) + ":" + String(min);
     }
 };
 
+
+inline bool currentTimeInRange(const Time start, const Time end) {
+    Time current {0, 0};
+    current.set(now());
+
+    // if end is the as start (would be stupid, but might as well)
+    if (end == start && start == current) return true;
+    if (end == start && start != current) return false;
+
+    // if start end is after midnight, and start is before midnight
+    if (start > end) return (current > start || current < end);
+
+    // normal case
+    return (current > start && current < end);
+}
 
 #endif //TIME_CUSTOM_H

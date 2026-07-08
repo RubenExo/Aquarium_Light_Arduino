@@ -8,8 +8,6 @@
 #define LEFT 5
 #define RIGHT 3
 
-
-
 Light light(LEFT, RIGHT);
 time_t t = now(); // store the current time in time variable t
 bool checkAlarms = false;

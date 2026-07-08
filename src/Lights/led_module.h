@@ -63,8 +63,15 @@ public:
     }
 
     void set_time_trigger(const Time time_on,const Time time_off) {
+
         on_time = time_on;
         off_time = time_off;
+
+        if (currentTimeInRange(time_on, time_off)) {
+            state = dimOn;
+        } else {
+            state = dimOff;
+        }
     }
     void set_trigger_delays(const int delay_on, const int delay_off) {
         on_delay = delay_on;
